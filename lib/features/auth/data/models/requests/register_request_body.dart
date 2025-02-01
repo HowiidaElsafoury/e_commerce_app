@@ -1,11 +1,11 @@
 class RegisterRequestBody {
-  String firstName;
-  String lastName;
-  String email;
-  String password;
-  String rePassword;
-  String phone;
-  String gender;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? password;
+  String? rePassword;
+  String? phone;
+  String? gender;
 
   RegisterRequestBody({
     required this.firstName,
@@ -14,7 +14,7 @@ class RegisterRequestBody {
     required this.password,
     required this.rePassword,
     required this.phone,
-    required this.gender,
+    this.gender,
   });
 
   factory RegisterRequestBody.fromJson(Map<String, dynamic> json) =>
