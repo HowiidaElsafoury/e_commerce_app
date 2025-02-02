@@ -1,10 +1,12 @@
+import 'package:dartz/dartz.dart';
+import 'package:e_commerce_app/features/auth/data/models/responses/user_model.dart';
+import 'package:e_commerce_app/features/auth/data/models/responses/user_tokens.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/app_constants/app_constants.dart';
 import '../data_sources/remote_data_sources/auth_data_sources.dart';
 import '../models/requests/register_request_body.dart';
-
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 @injectable
 class AuthRepo {
@@ -12,27 +14,29 @@ class AuthRepo {
 
   AuthRepo(this.authDataSources);
 
-  Future<void> login({required String email, required String password}) async {
-    try {
-      final token =
-          await authDataSources.login(email: email, password: password);
+  Future<Either<String, UserTokens>> login(
+      {required String email, required String password}) async {
+    final response =
+        await authDataSources.login(email: email, password: password);
+    return response.fold((error) {
+      return Left(error);
+    }, (result) async {
+      const storage = FlutterSecureStorage();
 
-      final storage = FlutterSecureStorage();
-
-      await storage.write(key: AppConstants.tokenSPK, value: token.token);
-    } catch (e) {
-      rethrow;
-    }
+      await storage.write(key: AppConstants.tokenSPK, value: result.token);
+      return Right(result);
+    });
   }
 
-  Future<void> register(final RegisterRequestBody registerRequestBody) async {
-    try {
-      final userModel = await authDataSources.register(registerRequestBody);
-
-      final storage = FlutterSecureStorage();
-      await storage.write(key: AppConstants.tokenSPK, value: userModel.token);
-    } catch (e) {
-      rethrow;
-    }
+  Future<Either<String, UserModel>> register(
+      final RegisterRequestBody registerRequestBody) async {
+    final userModel = await authDataSources.register(registerRequestBody);
+    return userModel.fold((error) {
+      return Left(error);
+    }, (result) async {
+      const storage = FlutterSecureStorage();
+      await storage.write(key: AppConstants.tokenSPK, value: result.token);
+      return Right(result);
+    });
   }
 }

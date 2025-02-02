@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/shared_widgets/custom_button.dart';
 import '../../../../../core/shared_widgets/custom_text_button.dart';
 import '../../../../../core/shared_widgets/custom_text_form_field.dart';
-import '../../../../../core/utilis/loading_dialogue.dart';
+import '../../../../../core/utilis/app_dialogues.dart';
 import '../../../../../core/utilis/validator.dart';
 import '../cubits/login_cubit/login_cubit.dart';
 import 'register_view.dart';
@@ -56,19 +56,15 @@ class _LoginViewState extends State<LoginView> {
           child: BlocListener<LoginCubit, LoginState>(
             listener: (context, state) {
               if (state is LoginLoading) {
-                showLoadingDialogue(context);
+                AppDialogs.showLoading(context: context);
               } else if (state is LoginSuccess) {
-                Navigator.pop(context);
-                const snackBar = SnackBar(
-                  content: Text("Login Success"),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                AppDialogs.hideDialog(context);
+                AppDialogs.showSuccessDialog(context: context, message: "");
               } else if (state is LoginFailure) {
-                Navigator.pop(context);
-                final snackBar = SnackBar(
-                  content: Text(state.message),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                AppDialogs.hideDialog(context);
+
+                AppDialogs.showErrorDialog(
+                    context: context, errorMassage: state.message);
               }
             },
             child: SingleChildScrollView(

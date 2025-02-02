@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/shared_widgets/custom_button.dart';
 import '../../../../../core/shared_widgets/custom_text_button.dart';
 import '../../../../../core/shared_widgets/custom_text_form_field.dart';
+import '../../../../../core/utilis/app_dialogues.dart';
 import '../../../../../core/utilis/enums/gender_enums.dart';
-import '../../../../../core/utilis/loading_dialogue.dart';
 import '../../../../../core/utilis/validator.dart';
 import '../../../data/models/requests/register_request_body.dart';
 import '../cubits/register_cubit/register_cubit.dart';
@@ -81,20 +81,15 @@ class _RegisterViewState extends State<RegisterView> {
       body: BlocListener<RegisterCubit, RegisterState>(
         listener: (context, state) {
           if (state is RegisterLoading) {
-            showLoadingDialogue(context);
+            AppDialogs.showLoading(context: context);
           } else if (state is RegisterSuccess) {
-            Navigator.pop(context);
-            const snackBar = SnackBar(
-              content: Text(
-                  "Account created Successfully \n please login to proceed"),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            AppDialogs.hideDialog(context);
+            AppDialogs.showSuccessDialog(context: context, message: "");
           } else if (state is RegisterFailure) {
-            Navigator.pop(context);
-            final snackBar = SnackBar(
-              content: Text(state.message),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            AppDialogs.hideDialog(context);
+
+            AppDialogs.showErrorDialog(
+                context: context, errorMassage: state.message);
           }
         },
         child: Padding(
