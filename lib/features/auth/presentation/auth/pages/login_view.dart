@@ -6,6 +6,7 @@ import '../../../../../core/shared_widgets/custom_text_button.dart';
 import '../../../../../core/shared_widgets/custom_text_form_field.dart';
 import '../../../../../core/utilis/app_dialogues.dart';
 import '../../../../../core/utilis/validator.dart';
+import '../../../../layout/presentation/layout_view.dart';
 import '../cubits/login_cubit/login_cubit.dart';
 import 'register_view.dart';
 
@@ -59,7 +60,12 @@ class _LoginViewState extends State<LoginView> {
                 AppDialogs.showLoading(context: context);
               } else if (state is LoginSuccess) {
                 AppDialogs.hideDialog(context);
-                AppDialogs.showSuccessDialog(context: context, message: "");
+                AppDialogs.showSuccessDialog(
+                  context: context,
+                  message: "",
+                  whenAnimationFinished: () => Navigator.pushReplacementNamed(
+                      context, LayoutView.routeName),
+                );
               } else if (state is LoginFailure) {
                 AppDialogs.hideDialog(context);
 

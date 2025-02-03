@@ -5,6 +5,8 @@ import '../../features/auth/presentation/auth/cubits/login_cubit/login_cubit.dar
 import '../../features/auth/presentation/auth/cubits/register_cubit/register_cubit.dart';
 import '../../features/auth/presentation/auth/pages/login_view.dart';
 import '../../features/auth/presentation/auth/pages/register_view.dart';
+import '../../features/layout/presentation/cubit/layout_cubit.dart';
+import '../../features/layout/presentation/layout_view.dart';
 import '../di/di.dart';
 
 class AppRoutes {
@@ -31,6 +33,14 @@ class AppRoutes {
             child: const RegisterView(),
           ),
         );
+      case LayoutView.routeName:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<LayoutCubit>(),
+            child: const LayoutView(),
+          ),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(),

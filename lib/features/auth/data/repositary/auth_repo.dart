@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce_app/features/auth/data/models/responses/user_model.dart';
-import 'package:e_commerce_app/features/auth/data/models/responses/user_tokens.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/app_constants/app_constants.dart';
 import '../data_sources/remote_data_sources/auth_data_sources.dart';
 import '../models/requests/register_request_body.dart';
+import '../models/responses/user_model.dart';
+import '../models/responses/user_tokens.dart';
 
 @injectable
 class AuthRepo {

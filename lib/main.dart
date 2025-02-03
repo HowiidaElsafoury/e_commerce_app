@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/di/di.dart';
 import 'core/routing/app_router.dart';
 import 'core/theme/application_theme.dart';
-import 'features/auth/presentation/auth/pages/login_view.dart';
+import 'features/layout/presentation/layout_view.dart';
 
 void main() {
   configureDependencies();
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           title: 'First Method',
           // You can use the library anywhere in the app even in theme
           theme: ApplicationTheme.lightTheme,
-          initialRoute: LoginView.routeName,
+          initialRoute: LayoutView.routeName,
           onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
         );
       },
