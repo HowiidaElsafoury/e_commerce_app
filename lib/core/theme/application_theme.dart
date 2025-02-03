@@ -6,7 +6,7 @@ import '../app_constants/app_constants.dart';
 
 class ApplicationTheme {
   static ThemeData lightTheme = ThemeData(
-    primaryColor: AppConstants.primaryColor,
+    primaryColor: AppConstants.kprimaryColor,
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
       toolbarHeight: 72.h,
@@ -33,5 +33,15 @@ class ApplicationTheme {
           fontWeight: FontWeight.normal,
           color: Colors.black,
         )),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedIconTheme:
+            IconThemeData(color: AppConstants.kprimaryColor, size: 24),
+        selectedItemColor: AppConstants.kprimaryColor,
+        unselectedIconTheme: const IconThemeData(
+          color: Color(0xFF7D7D7D),
+        ),
+        unselectedItemColor: const Color(0xFF7D7D7D)),
   );
 }
