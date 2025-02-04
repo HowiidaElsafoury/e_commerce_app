@@ -6,8 +6,8 @@ import '../../app_constants/app_constants.dart';
 
 class DioFactory {
   static Dio? _dio;
-  static getDio() {
-    Duration timeOut = Duration(seconds: 30);
+  static Dio getDio() {
+    Duration timeOut = const Duration(seconds: 30);
     if (_dio == null) {
       _dio = Dio();
       _dio!.options
@@ -18,7 +18,7 @@ class DioFactory {
       _addFreeDioInterceptors(_dio!);
     }
 
-    return _dio;
+    return _dio!;
   }
 
   static void _addFreeDioInterceptors(Dio dio) {

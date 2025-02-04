@@ -1,6 +1,8 @@
 import 'package:e_commerce_app/features/home/presentation/screens/widgets/home_data_list.dart';
+import 'package:e_commerce_app/features/search/presentation/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../cubits/home_cubits/home_cubit.dart';
 
@@ -23,11 +25,39 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            // title:SearchAnchor.bar(suggestionsBuilder: (context,searchController){
-            //   final String input=searchController.text;
-            //   return
-            // }),
-            ),
+          title: Column(
+            children: [
+              SizedBox(
+                height: 15.h,
+              ),
+              SearchAnchor(
+                suggestionsBuilder: (context, controller) => [],
+                builder: (context, controller) {
+                  return TextField(
+                    controller: controller,
+                    readOnly: true, // Prevents typing directly
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        SearchScreen.routeName,
+                      );
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Search...",
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          // title: TextButton(
+          //     onPressed: () =>
+          //         Navigator.pushNamed(context, SearchScreen.routeName),
+          //     child: const Text("Search")),
+        ),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             if (state is HomeLoading) {
