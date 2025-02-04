@@ -3,8 +3,7 @@ import 'package:e_commerce_app/features/home/domain/entities/home_data_entity.da
 import 'package:e_commerce_app/features/home/domain/repo/home_repo.dart';
 import 'package:injectable/injectable.dart';
 
-import '../data_sources/remote_date_src/home_category_data_src.dart';
-import '../model/home_data_model.dart';
+import '../data_sources/remote_date_src/home_data_remote_data_src.dart';
 
 @Injectable(as: HomeRepo)
 class HomeRepoImpl implements HomeRepo {

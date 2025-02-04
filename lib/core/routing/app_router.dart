@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/features/search/presentation/cubits/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,6 +8,7 @@ import '../../features/auth/presentation/auth/pages/login_view.dart';
 import '../../features/auth/presentation/auth/pages/register_view.dart';
 import '../../features/layout/presentation/cubit/layout_cubit.dart';
 import '../../features/layout/presentation/layout_view.dart';
+import '../../features/search/presentation/screens/search_screen.dart';
 import '../di/di.dart';
 
 class AppRoutes {
@@ -38,6 +40,13 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<LayoutCubit>(),
             child: const LayoutView(),
+          ),
+        );
+      case SearchScreen.routeName:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<SearchCubit>(),
+            child: const SearchScreen(),
           ),
         );
 
