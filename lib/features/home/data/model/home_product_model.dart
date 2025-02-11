@@ -1,13 +1,13 @@
 import '../../domain/entities/home_product_entity.dart';
 
 class HomeProductModel {
-  String id;
+  String? id;
   String title;
   String slug;
   String description;
   String imgCover;
   List<String> images;
-  int price;
+  int? price;
   int priceAfterDiscount;
   int quantity;
   String category;
@@ -42,6 +42,7 @@ class HomeProductModel {
   HomeProductEntity toEntity() {
     return HomeProductEntity(
         id: id,
+        price: price,
         imgCover: imgCover,
         priceAfterDiscount: priceAfterDiscount,
         title: title);

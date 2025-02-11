@@ -10,19 +10,22 @@ class HomeProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return Column(
-      children: [
-        Image.network(
-          homeProduct.imgCover ?? "",
-          width: 131.h,
-          height: 151.h,
-          fit: BoxFit.cover,
-        ),
-        8.verticalSpace,
-        Text(homeProduct.title ?? '', style: theme.textTheme.bodySmall),
-        Text('${homeProduct.priceAfterDiscount} EGP',
-            style: theme.textTheme.bodyMedium),
-      ],
+    return Padding(
+      padding: EdgeInsets.only(right: 16.w),
+      child: Column(
+        children: [
+          Image.network(
+            homeProduct.imgCover ?? "",
+            width: 131.h,
+            height: 151.h,
+            fit: BoxFit.cover,
+          ),
+          8.verticalSpace,
+          Text(homeProduct.title ?? '', style: theme.textTheme.bodySmall),
+          Text('${homeProduct.priceAfterDiscount} EGP',
+              style: theme.textTheme.bodyMedium),
+        ],
+      ),
     );
   }
 }

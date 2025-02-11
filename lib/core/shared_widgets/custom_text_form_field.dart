@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -24,10 +25,10 @@ class CustomTextFormField extends StatelessWidget {
         hintText: hintText,
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black87),
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.black87),
           borderRadius: BorderRadius.all(
-            Radius.circular(8),
+            Radius.circular(8.r),
           ),
         ),
       ),

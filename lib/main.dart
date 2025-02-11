@@ -1,10 +1,10 @@
+import 'package:e_commerce_app/features/layout/presentation/layout_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/di/di.dart';
 import 'core/routing/app_router.dart';
 import 'core/theme/application_theme.dart';
-import 'features/layout/presentation/layout_view.dart';
 
 void main() {
   configureDependencies();

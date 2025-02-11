@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/app_constants/app_constants.dart';
 import '../../../../../../core/shared_widgets/custom_text_button.dart';
+import '../../../../../best_seller/presentation/screens/best_seller_view.dart';
 import '../../../../domain/entities/home_product_entity.dart';
 import 'home_product_item.dart';
 
@@ -31,7 +32,11 @@ class HomeProductList extends StatelessWidget {
                   style: theme.textTheme.bodyLarge,
                 ),
                 CustomTextButton(
-                    title: "View All", color: AppConstants.kprimaryColor),
+                    onTap: () {
+                      Navigator.pushNamed(context, BestSellerView.routeName);
+                    },
+                    title: "View All",
+                    color: AppConstants.kprimaryColor),
               ],
             ),
           ),
