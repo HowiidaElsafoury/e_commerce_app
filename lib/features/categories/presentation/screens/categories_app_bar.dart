@@ -1,7 +1,9 @@
-import 'package:e_commerce_app/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../layout/presentation/cubit/layout_cubit.dart';
+import '../../../search/presentation/screens/search_screen.dart';
 
 class CategoriesAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CategoriesAppBar({super.key});
@@ -17,11 +19,12 @@ class _CategoriesAppBarState extends State<CategoriesAppBar> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return AppBar(
+      title: Column(
         children: [
-          14.verticalSpace,
+          SizedBox(
+            height: 15.h,
+          ),
           Row(
             children: [
               IconButton(
@@ -29,15 +32,28 @@ class _CategoriesAppBarState extends State<CategoriesAppBar> {
                     context.read<LayoutCubit>().navigateToPrevPage();
                   },
                   icon: const Icon(Icons.arrow_back_ios)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Categories",
-                    style: theme.textTheme.titleLarge,
-                  ),
-                  2.verticalSpace,
-                ],
+              Expanded(
+                child: SearchAnchor(
+                  suggestionsBuilder: (context, controller) => [],
+                  builder: (context, controller) {
+                    return TextField(
+                      controller: controller,
+                      readOnly: true, // Prevents typing directly
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          SearchScreen.routeName,
+                        );
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Search...",
+                        prefixIcon: const Icon(Icons.search),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),

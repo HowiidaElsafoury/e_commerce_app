@@ -7,6 +7,14 @@ class LayoutCubit extends Cubit<LayoutState> {
   LayoutCubit() : super(LayoutInitial());
   final PageController controller = PageController(initialPage: 0);
   int currentPageIndex = 0;
+  String selectedCategoryId = "";
+  void navigateToCategoryTap(String categoryId) {
+    selectedCategoryId = categoryId;
+    navigateTo(1);
+
+    emit(LayoutChangeState());
+  }
+
   void navigateTo(int index) {
     print(currentPageIndex);
     currentPageIndex = index;

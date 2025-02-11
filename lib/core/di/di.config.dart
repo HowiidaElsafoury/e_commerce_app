@@ -46,7 +46,6 @@ import '../../features/home/domain/use_cases/get_home_data_use_case.dart'
     as _i222;
 import '../../features/home/presentation/cubits/home_cubits/home_cubit.dart'
     as _i19;
-import '../../features/layout/presentation/cubit/layout_cubit.dart' as _i917;
 import '../../features/product_details/data/data_sources/remote_data_sources/product_details_remote_data_src.dart'
     as _i135;
 import '../../features/product_details/data/repo_impl/product_details_repo_impl.dart'
@@ -77,14 +76,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i383.AuthDataSources>(() => _i383.AuthDataSources());
     gh.factory<_i865.BestSellerRemoteDataSrc>(
         () => _i865.BestSellerRemoteDataSrc());
+    gh.factory<_i735.AllCategoriesRemoteDataSrc>(
+        () => _i735.AllCategoriesRemoteDataSrc());
     gh.factory<_i221.HomeDataRemoteDataSrc>(
         () => _i221.HomeDataRemoteDataSrc());
-    gh.factory<_i917.LayoutCubit>(() => _i917.LayoutCubit());
     gh.factory<_i135.ProductDetailsRemoteDataSrc>(
         () => _i135.ProductDetailsRemoteDataSrc());
     gh.factory<_i242.SearchRemoteDataSrc>(() => _i242.SearchRemoteDataSrc());
-    gh.factory<_i735.AllCategoriesRemoteDataSrc>(
-        () => _i735.AllCategoriesRemoteDataSrc());
     gh.factory<_i791.SearchRepo>(
         () => _i791.SearchRepo(gh<_i242.SearchRemoteDataSrc>()));
     gh.factory<_i381.BestSellerRepo>(
@@ -103,10 +101,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i807.LoginCubit>(() => _i807.LoginCubit(gh<_i55.AuthRepo>()));
     gh.factory<_i927.RegisterCubit>(
         () => _i927.RegisterCubit(gh<_i55.AuthRepo>()));
-    gh.factory<_i843.GetCategoryUseCase>(
-        () => _i843.GetCategoryUseCase(gh<_i66.CategoriesRepo>()));
     gh.factory<_i996.GetCategoryProductUseCase>(
         () => _i996.GetCategoryProductUseCase(gh<_i66.CategoriesRepo>()));
+    gh.factory<_i843.GetCategoryUseCase>(
+        () => _i843.GetCategoryUseCase(gh<_i66.CategoriesRepo>()));
     gh.factory<_i222.GetHomeDataUseCase>(
         () => _i222.GetHomeDataUseCase(gh<_i280.HomeRepo>()));
     gh.factory<_i1049.BestSellerCubit>(

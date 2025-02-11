@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/core/shared_widgets/product_card_with_list/product_card_list.dart';
 import 'package:e_commerce_app/features/categories/presentation/screens/categories_app_bar.dart';
+import 'package:e_commerce_app/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +9,9 @@ import '../cubit/categories_cubit.dart';
 
 class CategoriesView extends StatefulWidget {
   static const String routeName = "category view";
-  const CategoriesView({super.key});
+  final String? categoryId;
+
+  const CategoriesView({super.key, this.categoryId});
 
   @override
   State<CategoriesView> createState() => _CategoriesViewState();
@@ -19,7 +22,9 @@ class _CategoriesViewState extends State<CategoriesView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<CategoriesCubit>().getAllCategoriesData();
+
+    context.read<CategoriesCubit>().getAllCategoriesData(
+        categoryId: context.read<LayoutCubit>().selectedCategoryId);
   }
 
   @override
@@ -46,6 +51,16 @@ class _CategoriesViewState extends State<CategoriesView> {
                   return Text(state.message);
                 } else if (state is CategoriesSuccess) {
                   return DefaultTabController(
+                    initialIndex: context
+                            .read<LayoutCubit>()
+                            .selectedCategoryId
+                            .isNotEmpty
+                        ? state.allCategories.indexWhere(
+                            (e) =>
+                                e.id ==
+                                context.read<LayoutCubit>().selectedCategoryId,
+                          )
+                        : 0,
                     length: state.allCategories.length,
                     child: Column(
                       children: [

@@ -3,8 +3,8 @@ import 'package:e_commerce_app/features/categories/domain/use_cases/get_category
 import 'package:e_commerce_app/features/categories/domain/use_cases/get_category_use_case.dart';
 import 'package:e_commerce_app/features/home/domain/entities/home_category_entity.dart';
 import 'package:e_commerce_app/features/home/domain/entities/home_product_entity.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 part 'categories_state.dart';
 
@@ -15,15 +15,20 @@ class CategoriesCubit extends Cubit<CategoriesState> {
 
   CategoriesCubit(this._getCategoryUseCase, this._getCategoryProductUseCase)
       : super(CategoriesInitial());
+  late final TabController controller;
 
-  Future<void> getAllCategoriesData() async {
+  Future<void> getAllCategoriesData({String? categoryId}) async {
     emit(CategoriesLoading());
     final response = await _getCategoryUseCase.getCategories();
     response.fold((error) => emit(CategoriesFailure(error)), (result) {
       emit(
         CategoriesSuccess(result),
       );
-      getCategoryProduct(result.first.id ?? "");
+      if (categoryId == null || categoryId.isEmpty) {
+        getCategoryProduct(result.first.id ?? "");
+      } else {
+        getCategoryProduct(categoryId);
+      }
     });
   }
 

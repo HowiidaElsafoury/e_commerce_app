@@ -42,7 +42,7 @@ class AppRoutes {
       case LayoutView.routeName:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt<LayoutCubit>(),
+            create: (context) => LayoutCubit(),
             child: const LayoutView(),
           ),
         );

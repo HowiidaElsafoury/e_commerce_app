@@ -25,7 +25,7 @@ class _LayoutViewState extends State<LayoutView> {
   @override
   void initState() {
     super.initState();
-    _layoutCubit = LayoutCubit();
+    _layoutCubit = context.read<LayoutCubit>();
     screensTab = [
       BlocProvider(
         create: (context) => getIt<HomeCubit>(),
@@ -33,7 +33,9 @@ class _LayoutViewState extends State<LayoutView> {
       ),
       BlocProvider(
         create: (context) => getIt<CategoriesCubit>(),
-        child: const CategoriesView(),
+        child: CategoriesView(
+          categoryId: _layoutCubit.selectedCategoryId,
+        ),
       ),
       SizedBox(
         child: IconButton(
@@ -59,9 +61,12 @@ class _LayoutViewState extends State<LayoutView> {
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             onTap: (int index) {
-              setState(() {
+              if (index == 1) {
+                _layoutCubit.navigateToCategoryTap("");
+              } else {
                 _layoutCubit.navigateTo(index);
-              });
+              }
+              setState(() {});
             },
             currentIndex: _layoutCubit.currentPageIndex,
             items: [
