@@ -1,4 +1,6 @@
+import 'package:e_commerce_app/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/app_constants/app_constants.dart';
@@ -31,7 +33,10 @@ class HomeCategoryList extends StatelessWidget {
                   style: theme.textTheme.bodyLarge,
                 ),
                 CustomTextButton(
-                    title: "View All", color: AppConstants.kprimaryColor),
+                    onTap: () =>
+                        context.read<LayoutCubit>().navigateToCategoryTap(""),
+                    title: "View All",
+                    color: AppConstants.kprimaryColor),
               ],
             ),
           ),

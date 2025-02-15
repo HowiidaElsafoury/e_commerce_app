@@ -18,8 +18,8 @@ class SearchProductList extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 8.h,
-        // crossAxisSpacing: 8.w,
-        childAspectRatio: 3 / 4,
+        crossAxisSpacing: 8.w,
+        childAspectRatio: 0.8,
       ),
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 16.h),
       scrollDirection: Axis.vertical,
