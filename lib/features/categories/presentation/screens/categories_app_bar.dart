@@ -20,6 +20,7 @@ class _CategoriesAppBarState extends State<CategoriesAppBar> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return AppBar(
+      automaticallyImplyLeading: false,
       title: Column(
         children: [
           SizedBox(

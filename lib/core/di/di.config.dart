@@ -27,6 +27,13 @@ import '../../features/best_seller/domain/use_case/get_best_seller_data_use_case
     as _i1045;
 import '../../features/best_seller/presentation/cubit/best_seller_cubit.dart'
     as _i1049;
+import '../../features/cart/data/data_source/remote_data_src/cart_remote_data_src.dart'
+    as _i551;
+import '../../features/cart/data/repo_impl/cart_repo_impl.dart' as _i966;
+import '../../features/cart/domain/repo/cart_repo.dart' as _i379;
+import '../../features/cart/domain/use_cases/get_cart_data_use_case.dart'
+    as _i254;
+import '../../features/cart/presentation/cubit/cart_cubit.dart' as _i499;
 import '../../features/categories/data/data_sources/remote_data_src/all_categories_remote_data_src.dart'
     as _i735;
 import '../../features/categories/data/repo_impl/all_categories_repo_impl.dart'
@@ -83,8 +90,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i135.ProductDetailsRemoteDataSrc>(
         () => _i135.ProductDetailsRemoteDataSrc());
     gh.factory<_i242.SearchRemoteDataSrc>(() => _i242.SearchRemoteDataSrc());
+    gh.factory<_i551.CartRemoteDataSrc>(() => _i551.CartRemoteDataSrc());
     gh.factory<_i791.SearchRepo>(
         () => _i791.SearchRepo(gh<_i242.SearchRemoteDataSrc>()));
+    gh.factory<_i379.CartRepo>(
+        () => _i966.CartRepoImpl(gh<_i551.CartRemoteDataSrc>()));
     gh.factory<_i381.BestSellerRepo>(
         () => _i333.BestSellerRepoImpl(gh<_i865.BestSellerRemoteDataSrc>()));
     gh.factory<_i66.CategoriesRepo>(() =>
@@ -94,6 +104,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i591.ProductDetailsRepoImpl(gh<_i135.ProductDetailsRemoteDataSrc>()));
     gh.factory<_i797.SearchCubit>(
         () => _i797.SearchCubit(gh<_i791.SearchRepo>()));
+    gh.factory<_i254.GetCartDataUseCase>(
+        () => _i254.GetCartDataUseCase(gh<_i379.CartRepo>()));
     gh.factory<_i280.HomeRepo>(
         () => _i886.HomeRepoImpl(gh<_i221.HomeDataRemoteDataSrc>()));
     gh.factory<_i1045.GetBestSellerDataUseCase>(
@@ -111,6 +123,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1049.BestSellerCubit(gh<_i1045.GetBestSellerDataUseCase>()));
     gh.factory<_i271.GetProductDetailsUseCase>(
         () => _i271.GetProductDetailsUseCase(gh<_i151.ProductDetailsRepo>()));
+    gh.factory<_i499.CartCubit>(
+        () => _i499.CartCubit(gh<_i254.GetCartDataUseCase>()));
     gh.factory<_i19.HomeCubit>(
         () => _i19.HomeCubit(gh<_i222.GetHomeDataUseCase>()));
     gh.factory<_i4.ProductDetailsCubit>(

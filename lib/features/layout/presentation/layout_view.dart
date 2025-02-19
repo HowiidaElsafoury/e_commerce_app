@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/features/categories/presentation/cubit/categories_cubit.dart';
+import 'package:e_commerce_app/features/cart/presentation/screens/cart_view.dart';
 import 'package:e_commerce_app/features/categories/presentation/screens/categories_view.dart';
 import 'package:e_commerce_app/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/app_constants/app_constants.dart';
-import '../../../core/di/di.dart';
-import '../../home/presentation/cubits/home_cubits/home_cubit.dart';
 import '../../home/presentation/screens/home_view.dart';
 
 class LayoutView extends StatefulWidget {
@@ -27,23 +25,11 @@ class _LayoutViewState extends State<LayoutView> {
     super.initState();
     _layoutCubit = context.read<LayoutCubit>();
     screensTab = [
-      BlocProvider(
-        create: (context) => getIt<HomeCubit>(),
-        child: const HomeView(),
+      const HomeView(),
+      CategoriesView(
+        categoryId: _layoutCubit.selectedCategoryId,
       ),
-      BlocProvider(
-        create: (context) => getIt<CategoriesCubit>(),
-        child: CategoriesView(
-          categoryId: _layoutCubit.selectedCategoryId,
-        ),
-      ),
-      SizedBox(
-        child: IconButton(
-            onPressed: () {
-              context.read<LayoutCubit>().navigateToPrevPage();
-            },
-            icon: const Icon(Icons.arrow_back_ios)),
-      ),
+      const CartView(),
       const SizedBox(),
     ];
   }
