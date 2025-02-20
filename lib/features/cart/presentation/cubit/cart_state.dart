@@ -19,3 +19,16 @@ final class CartFailure extends CartState {
   final String message;
   CartFailure(this.message);
 }
+
+final class AddCartSuccess extends CartState {}
+
+final class AddCartLoading extends CartState {
+  final String productId;
+
+  AddCartLoading(this.productId);
+}
+
+final class AddCartFailure extends CartState {
+  final String message;
+  AddCartFailure(this.message);
+}

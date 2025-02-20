@@ -16,6 +16,15 @@ class CartView extends StatelessWidget {
       body: Column(
         children: [
           BlocBuilder<CartCubit, CartState>(
+            buildWhen: (previous, current) {
+              if (current is CartLoading ||
+                  current is CartFailure ||
+                  current is CartSuccess) {
+                return true;
+              } else {
+                return false;
+              }
+            },
             builder: (context, state) {
               if (state is CartLoading) {
                 return const CircularProgressIndicator();

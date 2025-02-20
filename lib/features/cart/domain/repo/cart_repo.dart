@@ -3,4 +3,6 @@ import 'package:e_commerce_app/features/cart/domain/entities/cart_response_entit
 
 abstract class CartRepo {
   Future<Either<String, CartResponseEntity>> getCartData();
+  Future<Either<String, CartResponseEntity>> addCartData(
+      String productId, int quantity);
 }

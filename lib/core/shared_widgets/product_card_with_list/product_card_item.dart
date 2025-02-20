@@ -1,9 +1,12 @@
 import 'package:e_commerce_app/core/app_constants/app_constants.dart';
 import 'package:e_commerce_app/core/shared_widgets/custom_card_button.dart';
+import 'package:e_commerce_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce_app/features/home/domain/entities/home_product_entity.dart';
-import 'package:e_commerce_app/features/product_details/presentation/screens/product_details_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../features/product_details/presentation/screens/product_details_view.dart';
 
 class ProductCardItem extends StatelessWidget {
   final HomeProductEntity bestSellerProduct;
@@ -56,7 +59,21 @@ class ProductCardItem extends StatelessWidget {
               ),
             ),
             8.verticalSpace,
-            const CustomCardButtom(buttonText: "Add To Cart"),
+            BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                bool isLoading = false;
+                if (state is AddCartLoading) {
+                  isLoading = true && state.productId == bestSellerProduct.id;
+                }
+                return CustomCardButtom(
+                  onTap: () => context
+                      .read<CartCubit>()
+                      .addCartData(bestSellerProduct.id ?? "", 1),
+                  buttonText: "Add to Cart",
+                  isLoading: isLoading,
+                );
+              },
+            ),
           ],
         ),
       ),

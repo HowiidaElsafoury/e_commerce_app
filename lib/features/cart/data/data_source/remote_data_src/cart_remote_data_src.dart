@@ -34,4 +34,24 @@ class CartRemoteDataSrc {
       return Left(e.toString());
     }
   }
+
+  Future<Either<String, CartResponseModel>> addCartData(
+      String product, int quantity) async {
+    try {
+      const storage = FlutterSecureStorage();
+      final param = {"product": product, "quantity": quantity};
+      final String token = await storage.read(key: AppConstants.tokenSPK) ?? "";
+      final Map<String, dynamic> headers = {"Authorization": "Bearer $token"};
+      final response = await _dio.post("/cart",
+          options: Options(headers: headers), data: param);
+      if (response.statusCode == 200 && response.data != null) {
+        final data = CartResponseModel.fromJson(response.data);
+        return Right(data);
+      } else {
+        return Left(response.data["error"]);
+      }
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

@@ -20,6 +20,11 @@ import '../di/di.dart';
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
+    CartCubit? cartCubit;
+    createCartCubit() {
+      cartCubit ??= getIt<CartCubit>();
+      return cartCubit;
+    }
     // ForgetPasswordCubit? forgetPasswordCubit;
 
     // createForgetPassword() {
@@ -56,7 +61,7 @@ class AppRoutes {
                 create: (context) => getIt<CategoriesCubit>(),
               ),
               BlocProvider(
-                create: (context) => getIt<CartCubit>()..getCartData(),
+                create: (context) => createCartCubit()!..getCartData(),
               ),
             ],
             child: const LayoutView(),
@@ -72,16 +77,30 @@ class AppRoutes {
 
       case BestSellerView.routeName:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<BestSellerCubit>(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<BestSellerCubit>(),
+              ),
+              BlocProvider.value(
+                value: createCartCubit()!,
+              ),
+            ],
             child: const BestSellerView(),
           ),
         );
       case ProductDetailsView.routeName:
         final String productId = setting.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<ProductDetailsCubit>(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<ProductDetailsCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => createCartCubit()!,
+              ),
+            ],
             child: ProductDetailsView(productId: productId),
           ),
           settings: setting,

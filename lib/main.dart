@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/core/utilis/app_bloc_observer.dart';
+import 'package:e_commerce_app/features/auth/presentation/auth/pages/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/di/di.dart';
 import 'core/routing/app_router.dart';
 import 'core/theme/application_theme.dart';
-import 'features/layout/presentation/layout_view.dart';
 
 void main() {
   configureDependencies();
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           title: 'First Method',
           // You can use the library anywhere in the app even in theme
           theme: ApplicationTheme.lightTheme,
-          initialRoute: LayoutView.routeName,
+          initialRoute: LoginView.routeName,
           onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
         );
       },

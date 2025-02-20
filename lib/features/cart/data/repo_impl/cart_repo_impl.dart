@@ -19,4 +19,16 @@ class CartRepoImpl implements CartRepo {
       ),
     );
   }
+
+  @override
+  Future<Either<String, CartResponseEntity>> addCartData(
+      String productId, int quantity) async {
+    final response = await _cartRemoteDataSrc.addCartData(productId, quantity);
+    return response.fold(
+      (error) => Left(error),
+      (result) => Right(
+        result.toEntity(),
+      ),
+    );
+  }
 }

@@ -31,6 +31,8 @@ import '../../features/cart/data/data_source/remote_data_src/cart_remote_data_sr
     as _i551;
 import '../../features/cart/data/repo_impl/cart_repo_impl.dart' as _i966;
 import '../../features/cart/domain/repo/cart_repo.dart' as _i379;
+import '../../features/cart/domain/use_cases/add_cart_data_use_case.dart'
+    as _i456;
 import '../../features/cart/domain/use_cases/get_cart_data_use_case.dart'
     as _i254;
 import '../../features/cart/presentation/cubit/cart_cubit.dart' as _i499;
@@ -106,6 +108,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i797.SearchCubit(gh<_i791.SearchRepo>()));
     gh.factory<_i254.GetCartDataUseCase>(
         () => _i254.GetCartDataUseCase(gh<_i379.CartRepo>()));
+    gh.factory<_i456.AddCartDataUseCase>(
+        () => _i456.AddCartDataUseCase(gh<_i379.CartRepo>()));
     gh.factory<_i280.HomeRepo>(
         () => _i886.HomeRepoImpl(gh<_i221.HomeDataRemoteDataSrc>()));
     gh.factory<_i1045.GetBestSellerDataUseCase>(
@@ -121,10 +125,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i222.GetHomeDataUseCase(gh<_i280.HomeRepo>()));
     gh.factory<_i1049.BestSellerCubit>(
         () => _i1049.BestSellerCubit(gh<_i1045.GetBestSellerDataUseCase>()));
+    gh.factory<_i499.CartCubit>(() => _i499.CartCubit(
+          gh<_i254.GetCartDataUseCase>(),
+          gh<_i456.AddCartDataUseCase>(),
+        ));
     gh.factory<_i271.GetProductDetailsUseCase>(
         () => _i271.GetProductDetailsUseCase(gh<_i151.ProductDetailsRepo>()));
-    gh.factory<_i499.CartCubit>(
-        () => _i499.CartCubit(gh<_i254.GetCartDataUseCase>()));
     gh.factory<_i19.HomeCubit>(
         () => _i19.HomeCubit(gh<_i222.GetHomeDataUseCase>()));
     gh.factory<_i4.ProductDetailsCubit>(

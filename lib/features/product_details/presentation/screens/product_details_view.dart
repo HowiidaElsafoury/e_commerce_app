@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../cart/presentation/cubit/cart_cubit.dart';
+
 class ProductDetailsView extends StatefulWidget {
   static const String routeName = "Product details view";
   final String productId;
@@ -95,7 +97,21 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                       8.verticalSpace,
                       Text(product.description ?? ""),
                       24.verticalSpace,
-                      const CustomButton(buttonText: "Add to Cart"),
+                      BlocBuilder<CartCubit, CartState>(
+                        builder: (context, state) {
+                          bool isLoading = false;
+                          if (state is AddCartLoading) {
+                            isLoading = true;
+                          }
+                          return CustomButton(
+                            onTap: () => context
+                                .read<CartCubit>()
+                                .addCartData(widget.productId, 1),
+                            buttonText: "Add to Cart",
+                            isLoading: isLoading,
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
