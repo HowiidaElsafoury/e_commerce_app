@@ -1,12 +1,16 @@
+import 'package:e_commerce_app/features/cart/presentation/cubits/cubit/cart_functions_cubit.dart';
 import 'package:e_commerce_app/features/cart/presentation/screens/cart_view.dart';
 import 'package:e_commerce_app/features/categories/presentation/screens/categories_view.dart';
 import 'package:e_commerce_app/features/layout/presentation/cubit/layout_cubit.dart';
+import 'package:e_commerce_app/features/profile/presentation/screens/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/app_constants/app_constants.dart';
+import '../../../core/di/di.dart';
 import '../../home/presentation/screens/home_view.dart';
+import '../../profile/presentation/cubit/profile_cubit.dart';
 
 class LayoutView extends StatefulWidget {
   static const String routeName = "layout view";
@@ -29,8 +33,13 @@ class _LayoutViewState extends State<LayoutView> {
       CategoriesView(
         categoryId: _layoutCubit.selectedCategoryId,
       ),
-      const CartView(),
-      const SizedBox(),
+      BlocProvider(
+          create: (context) => getIt<CartFunctionsCubit>(),
+          child: const CartView()),
+      BlocProvider(
+        create: (context) => getIt<ProfileCubit>(),
+        child: const ProfileView(),
+      ),
     ];
   }
 

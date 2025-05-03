@@ -16,9 +16,9 @@ class AppBlocObserver extends BlocObserver {
   void onChange(BlocBase bloc, Change change) {
     if (!kReleaseMode) {
       log('${bloc.runtimeType}', name: '🔄 State Changed');
-      log('Current State: ${change.currentState}',
+      log('Previous State: ${change.currentState}',
           name: '⏪ ${bloc.runtimeType}');
-      log('Next State: ${change.nextState}', name: '⏩ ${bloc.runtimeType}');
+      log('Current State: ${change.nextState}', name: '⏩ ${bloc.runtimeType}');
     }
     super.onChange(bloc, change);
   }

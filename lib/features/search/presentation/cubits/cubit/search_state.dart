@@ -6,7 +6,7 @@ sealed class SearchState {}
 final class SearchInitial extends SearchState {}
 
 final class SearchSuccess extends SearchState {
-  final List<HomeProductEntity> data;
+  final List<HomeProductEntity?> data;
   SearchSuccess(this.data);
 }
 

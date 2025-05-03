@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../cart/presentation/cubit/cart_cubit.dart';
+import '../../../cart/presentation/cubits/cart_cubit/cart_cubit.dart';
 
 class ProductDetailsView extends StatefulWidget {
   static const String routeName = "Product details view";

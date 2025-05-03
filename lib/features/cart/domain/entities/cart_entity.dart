@@ -6,7 +6,7 @@ class CartEntity {
 
   final double? totalPrice;
 
-  final List<CartItemEntity> cartItems;
+  final List<CartItemEntity?> cartItems;
 
   CartEntity({this.user, this.id, this.totalPrice, required this.cartItems});
 }

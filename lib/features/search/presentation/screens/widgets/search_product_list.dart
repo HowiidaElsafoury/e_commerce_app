@@ -5,7 +5,7 @@ import '../../../../home/domain/entities/home_product_entity.dart';
 import '../../../../home/presentation/screens/widgets/home_product/home_product_item.dart';
 
 class SearchProductList extends StatelessWidget {
-  final List<HomeProductEntity> product;
+  final List<HomeProductEntity?> product;
   const SearchProductList({
     super.key,
     required this.product,

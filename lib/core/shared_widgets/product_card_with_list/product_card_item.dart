@@ -1,6 +1,6 @@
 import 'package:e_commerce_app/core/app_constants/app_constants.dart';
 import 'package:e_commerce_app/core/shared_widgets/custom_card_button.dart';
-import 'package:e_commerce_app/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:e_commerce_app/features/cart/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:e_commerce_app/features/home/domain/entities/home_product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../features/product_details/presentation/screens/product_details_view.dart';
 
 class ProductCardItem extends StatelessWidget {
-  final HomeProductEntity bestSellerProduct;
+  final HomeProductEntity? bestSellerProduct;
   const ProductCardItem({super.key, required this.bestSellerProduct});
 
   @override
@@ -19,7 +19,7 @@ class ProductCardItem extends StatelessWidget {
       onTap: () => Navigator.pushNamed(
         context,
         ProductDetailsView.routeName,
-        arguments: bestSellerProduct.id,
+        arguments: bestSellerProduct?.id,
       ),
       child: Container(
         width: 163.w,
@@ -33,7 +33,7 @@ class ProductCardItem extends StatelessWidget {
         child: Column(
           children: [
             Image.network(
-              bestSellerProduct.imgCover ?? "",
+              bestSellerProduct?.imgCover ?? "",
               width: 147.h,
               height: 131.h,
               fit: BoxFit.cover,
@@ -45,13 +45,13 @@ class ProductCardItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    bestSellerProduct.title ?? '',
+                    bestSellerProduct?.title ?? '',
                     style: theme.textTheme.bodySmall,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Row(
                     children: [
-                      Text('${bestSellerProduct.priceAfterDiscount} EGP',
+                      Text('${bestSellerProduct?.priceAfterDiscount} EGP',
                           style: theme.textTheme.bodyMedium),
                     ],
                   ),
@@ -63,12 +63,12 @@ class ProductCardItem extends StatelessWidget {
               builder: (context, state) {
                 bool isLoading = false;
                 if (state is AddCartLoading) {
-                  isLoading = true && state.productId == bestSellerProduct.id;
+                  isLoading = true && state.productId == bestSellerProduct?.id;
                 }
                 return CustomCardButtom(
                   onTap: () => context
                       .read<CartCubit>()
-                      .addCartData(bestSellerProduct.id ?? "", 1),
+                      .addCartData(bestSellerProduct?.id ?? "", 1),
                   buttonText: "Add to Cart",
                   isLoading: isLoading,
                 );

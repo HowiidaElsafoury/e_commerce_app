@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/core/utilis/app_bloc_observer.dart';
 import 'package:e_commerce_app/features/auth/presentation/auth/pages/login_view.dart';
+import 'package:e_commerce_app/features/cart/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +9,7 @@ import 'core/di/di.dart';
 import 'core/routing/app_router.dart';
 import 'core/theme/application_theme.dart';
 
+final navKey = GlobalKey<NavigatorState>();
 void main() {
   configureDependencies();
   Bloc.observer = AppBlocObserver();
@@ -25,13 +27,17 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       // Use builder only if you need to use library outside ScreenUtilInit context
       builder: (_, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'First Method',
-          // You can use the library anywhere in the app even in theme
-          theme: ApplicationTheme.lightTheme,
-          initialRoute: LoginView.routeName,
-          onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
+        return BlocProvider(
+          create: (context) => getIt<CartCubit>(),
+          child: MaterialApp(
+            navigatorKey: navKey,
+            debugShowCheckedModeBanner: false,
+            title: 'First Method',
+            // You can use the library anywhere in the app even in theme
+            theme: ApplicationTheme.lightTheme,
+            initialRoute: LoginView.routeName,
+            onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
+          ),
         );
       },
     );

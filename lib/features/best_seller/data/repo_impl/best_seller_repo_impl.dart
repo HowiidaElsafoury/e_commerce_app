@@ -11,7 +11,7 @@ class BestSellerRepoImpl implements BestSellerRepo {
   BestSellerRepoImpl(this._bestSellerRemoteDataSrc);
 
   @override
-  Future<Either<String, List<HomeProductEntity>>> getBestSellerData() async {
+  Future<Either<String, List<HomeProductEntity?>>> getBestSellerData() async {
     final response = await _bestSellerRemoteDataSrc.getBestSellerData();
     return response.fold(
       (error) => Left(error),

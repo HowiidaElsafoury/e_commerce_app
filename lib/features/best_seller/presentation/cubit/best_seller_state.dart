@@ -6,7 +6,7 @@ sealed class BestSellerState {}
 final class BestSellerInitial extends BestSellerState {}
 
 final class BestSellerSuccess extends BestSellerState {
-  final List<HomeProductEntity> data;
+  final List<HomeProductEntity?> data;
 
   BestSellerSuccess(this.data);
 }

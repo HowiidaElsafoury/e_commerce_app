@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductCardList extends StatelessWidget {
-  final List<HomeProductEntity> product;
+  final List<HomeProductEntity?> product;
 
   const ProductCardList({super.key, required this.product});
 

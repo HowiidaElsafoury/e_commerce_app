@@ -1,57 +1,113 @@
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:e_commerce_app/core/networking/dio/dio_factory.dart';
+import 'package:e_commerce_app/core/networking/api_call.dart';
+import 'package:e_commerce_app/core/networking/api_result.dart';
+import 'package:e_commerce_app/core/networking/dio/dio_helper.dart';
 import 'package:e_commerce_app/features/cart/data/models/cart_response_model.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../../core/app_constants/app_constants.dart';
 
 @injectable
 class CartRemoteDataSrc {
-  late final Dio _dio;
+  late final DioHelper _dioHelper;
   CartRemoteDataSrc() {
-    _dio = DioFactory.getDio();
+    _dioHelper = DioHelper.getInstance();
   }
 
-  Future<Either<String, CartResponseModel>> getCartData() async {
-    try {
-      const storage = FlutterSecureStorage();
+  Future<Result<CartResponseModel>> getCartData() async {
+    final result = await makeApiCall(() {
+      return _dioHelper.getData("/cart", tokenReq: true);
+    });
 
-      final String token = await storage.read(key: AppConstants.tokenSPK) ?? "";
-      final Map<String, dynamic> headers = {"Authorization": "Bearer $token"};
-      final response = await _dio.get(
-        "/cart",
-        options: Options(headers: headers),
-      );
-      if (response.statusCode == 200 && response.data != null) {
-        final data = CartResponseModel.fromJson(response.data);
-        return Right(data);
-      } else {
-        return Left(response.data["error"]);
-      }
-    } catch (e) {
-      return Left(e.toString());
+    switch (result) {
+      case Success():
+        final response = result.data!.data;
+        final responseData = CartResponseModel.fromJson(response);
+
+        return Success<CartResponseModel>(data: responseData);
+      case Error():
+        return Error<CartResponseModel>(exception: result.exception);
+    }
+    //  makeApiCall((){
+
+    //    final response = await _dioHelper.getData(
+    //       "/cart",
+    //     );
+    //     if (response.data != null) {
+    //       final data = CartResponseModel.fromJson(response.data);
+    //       return  data;
+    //     } else {
+    //       return Error( exception: Exception(response.data["error"]));
+    //     }
+
+    //  })
+  }
+
+  Future<Result<CartResponseModel>> addCartData(
+      String product, int quantity) async {
+    final result = await makeApiCall(() {
+      final body = {"product": product, "quantity": quantity};
+      return _dioHelper.postData("/cart", body: body);
+    });
+    switch (result) {
+      case Success():
+        final response = result.data!.data;
+        final responseData = CartResponseModel.fromJson(response);
+
+        return Success<CartResponseModel>(data: responseData);
+      case Error():
+        return Error<CartResponseModel>(exception: result.exception);
     }
   }
+  //  final body = {"product": product, "quantity": quantity};
 
-  Future<Either<String, CartResponseModel>> addCartData(
-      String product, int quantity) async {
-    try {
-      const storage = FlutterSecureStorage();
-      final param = {"product": product, "quantity": quantity};
-      final String token = await storage.read(key: AppConstants.tokenSPK) ?? "";
-      final Map<String, dynamic> headers = {"Authorization": "Bearer $token"};
-      final response = await _dio.post("/cart",
-          options: Options(headers: headers), data: param);
-      if (response.statusCode == 200 && response.data != null) {
-        final data = CartResponseModel.fromJson(response.data);
-        return Right(data);
-      } else {
-        return Left(response.data["error"]);
-      }
-    } catch (e) {
-      return Left(e.toString());
+  //     final response = await _dioHelper.postData("/cart",
+  //     body: body
+  //       );
+  //     if ( response.data != null) {
+  //       final data = CartResponseModel.fromJson(response.data);
+  //       return Success(data: data);
+  //     } else {
+  //       return Error(exception: Exception(response.data["error"]),);
+  //     }
+
+  Future<Result<CartResponseModel>> updateCartQuantity(
+      String productId, int quantity) async {
+    final result = await makeApiCall(() {
+      final body = {"quantity": quantity};
+      return _dioHelper.putData("/cart/$productId", body: body, tokenReq: true);
+    });
+    switch (result) {
+      case Success():
+        final response = result.data!.data;
+        final responseData = CartResponseModel.fromJson(response);
+        return Success<CartResponseModel>(data: responseData);
+
+      case Error():
+        return Error(exception: result.exception);
+    }
+  }
+  // final body = {"quantity": quantity};
+
+  //     final response = await _dioHelper.putData("/cart/$productId", body: body);
+  //     if (response.data != null) {
+  //       final data = CartResponseModel.fromJson(response.data);
+  //       return Right(data);
+  //     } else {
+  //       return Left(response.data["error"]);
+  //     }
+
+  Future<Result<CartResponseModel>> deleteCartData(String productId) async {
+    final result = await makeApiCall(() {
+      return _dioHelper.delete("/cart/$productId", tokenReq: true);
+    });
+
+    switch (result) {
+      case Success():
+        final response = result.data!.data;
+        final responseData = CartResponseModel.fromJson(response);
+
+        return Success<CartResponseModel>(data: responseData);
+
+      case Error():
+        return Error(exception: result.exception);
     }
   }
 }

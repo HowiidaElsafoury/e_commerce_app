@@ -27,7 +27,7 @@ class AllCategoriesRepoImpl implements CategoriesRepo {
   }
 
   @override
-  Future<Either<String, List<HomeProductEntity>>> getCategoryProduct(
+  Future<Either<String, List<HomeProductEntity?>>> getCategoryProduct(
       String categoryId) async {
     final response =
         await _allCategoriesRemoteDataSrc.getCategoryProduct(categoryId);

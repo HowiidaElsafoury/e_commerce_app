@@ -6,7 +6,7 @@ sealed class CartState {}
 final class CartInitial extends CartState {}
 
 final class CartSuccess extends CartState {
-  final CartResponseEntity cartResponseEntity;
+  final CartResponseEntity? cartResponseEntity;
 
   CartSuccess(this.cartResponseEntity);
 }

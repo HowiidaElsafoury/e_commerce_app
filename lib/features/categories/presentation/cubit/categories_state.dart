@@ -20,7 +20,7 @@ final class CategoriesFailure extends CategoriesState {
 }
 
 final class CategoriesProductSuccess extends CategoriesState {
-  final List<HomeProductEntity> data;
+  final List<HomeProductEntity?> data;
 
   CategoriesProductSuccess(this.data);
 }
