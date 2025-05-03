@@ -8,7 +8,7 @@ import '../../../../domain/entities/home_product_entity.dart';
 import 'home_product_item.dart';
 
 class HomeProductList extends StatelessWidget {
-  final List<HomeProductEntity> bestSeller;
+  final List<HomeProductEntity?> bestSeller;
   const HomeProductList({
     super.key,
     required this.bestSeller,

@@ -5,7 +5,7 @@ import '../../../../home/domain/entities/home_product_entity.dart';
 import '../../../../home/presentation/screens/widgets/home_product/home_product_item.dart';
 
 class SearchProductList extends StatelessWidget {
-  final List<HomeProductEntity> product;
+  final List<HomeProductEntity?> product;
   const SearchProductList({
     super.key,
     required this.product,
@@ -13,7 +13,6 @@ class SearchProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

@@ -8,7 +8,7 @@ class GetBestSellerDataUseCase {
   final BestSellerRepo _bestSellerRepo;
 
   GetBestSellerDataUseCase(this._bestSellerRepo);
-  Future<Either<String, List<HomeProductEntity>>> bestSellerData() async {
+  Future<Either<String, List<HomeProductEntity?>>> bestSellerData() async {
     return await _bestSellerRepo.getBestSellerData();
   }
 }

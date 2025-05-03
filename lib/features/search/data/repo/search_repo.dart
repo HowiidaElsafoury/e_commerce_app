@@ -8,7 +8,7 @@ class SearchRepo {
   final SearchRemoteDataSrc _searchRemoteDataSrc;
 
   SearchRepo(this._searchRemoteDataSrc);
-  Future<Either<String, List<HomeProductEntity>>> search(String query) async {
+  Future<Either<String, List<HomeProductEntity?>>> search(String query) async {
     final response = await _searchRemoteDataSrc.searchData(query);
     return response.fold(
       (error) => Left(error),

@@ -9,7 +9,7 @@ class GetCategoryProductUseCase {
   final CategoriesRepo _categoriesRepo;
 
   GetCategoryProductUseCase(this._categoriesRepo);
-  Future<Either<String, List<HomeProductEntity>>> getCategoryProduct(
+  Future<Either<String, List<HomeProductEntity?>>> getCategoryProduct(
       String catergoryId) async {
     return await _categoriesRepo.getCategoryProduct(catergoryId);
   }

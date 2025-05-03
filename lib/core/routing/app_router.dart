@@ -8,13 +8,13 @@ import '../../features/auth/presentation/auth/cubits/register_cubit/register_cub
 import '../../features/auth/presentation/auth/pages/login_view.dart';
 import '../../features/auth/presentation/auth/pages/register_view.dart';
 import '../../features/best_seller/presentation/screens/best_seller_view.dart';
-import '../../features/cart/presentation/cubit/cart_cubit.dart';
 import '../../features/categories/presentation/cubit/categories_cubit.dart';
 import '../../features/home/presentation/cubits/home_cubits/home_cubit.dart';
 import '../../features/layout/presentation/cubit/layout_cubit.dart';
 import '../../features/layout/presentation/layout_view.dart';
 import '../../features/product_details/presentation/cubit/product_details_cubit.dart';
 import '../../features/product_details/presentation/screens/product_details_view.dart';
+import '../../features/profile/presentation/screens/edit_profile_view.dart';
 import '../../features/search/presentation/screens/search_screen.dart';
 import '../di/di.dart';
 
@@ -55,9 +55,6 @@ class AppRoutes {
               BlocProvider(
                 create: (context) => getIt<CategoriesCubit>(),
               ),
-              BlocProvider(
-                create: (context) => getIt<CartCubit>()..getCartData(),
-              ),
             ],
             child: const LayoutView(),
           ),
@@ -92,6 +89,13 @@ class AppRoutes {
       //     child: const ProductDetailsView(),
       //   ),
       // );
+      case EditProfileView.routeName:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<BestSellerCubit>(),
+            child: const EditProfileView(),
+          ),
+        );
 
       default:
         return MaterialPageRoute(

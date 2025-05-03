@@ -4,6 +4,6 @@ import 'package:e_commerce_app/features/home/domain/entities/home_product_entity
 
 abstract class CategoriesRepo {
   Future<Either<String, List<HomeCategoryEntity>>> getAllCategoriesData();
-  Future<Either<String, List<HomeProductEntity>>> getCategoryProduct(
+  Future<Either<String, List<HomeProductEntity?>>> getCategoryProduct(
       String catergoryId);
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartProductList extends StatelessWidget {
-  final List<CartItemEntity> cartItems;
+  final List<CartItemEntity?> cartItems;
   const CartProductList({super.key, required this.cartItems});
 
   @override

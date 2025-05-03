@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../domain/entities/home_product_entity.dart';
 
 class HomeProductItem extends StatelessWidget {
-  final HomeProductEntity homeProduct;
+  final HomeProductEntity? homeProduct;
   const HomeProductItem(this.homeProduct, {super.key});
 
   @override
@@ -15,14 +15,14 @@ class HomeProductItem extends StatelessWidget {
       child: Column(
         children: [
           Image.network(
-            homeProduct.imgCover ?? "",
+            homeProduct?.imgCover ?? "",
             width: 131.h,
             height: 151.h,
             fit: BoxFit.cover,
           ),
           8.verticalSpace,
-          Text(homeProduct.title ?? '', style: theme.textTheme.bodySmall),
-          Text('${homeProduct.priceAfterDiscount} EGP',
+          Text(homeProduct?.title ?? '', style: theme.textTheme.bodySmall),
+          Text('${homeProduct?.priceAfterDiscount} EGP',
               style: theme.textTheme.bodyMedium),
         ],
       ),

@@ -18,7 +18,6 @@ class CategoriesAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CategoriesAppBarState extends State<CategoriesAppBar> {
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return AppBar(
       automaticallyImplyLeading: false,
       title: Column(

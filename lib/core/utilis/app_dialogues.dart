@@ -13,7 +13,7 @@ class AppDialogs {
         return PopScope(
           canPop: false,
           child: Lottie.asset(
-            "assets/animations/loading_animation.json",
+            "assets/animations/loading.json",
             height: 50.h,
             width: 20.w,
           ),

@@ -39,13 +39,14 @@ class HomeProductModel {
     required this.homeProductModelId,
   });
 
-  HomeProductEntity toEntity() {
+  HomeProductEntity? toEntity() {
     return HomeProductEntity(
         id: id,
         price: price,
         imgCover: imgCover,
         priceAfterDiscount: priceAfterDiscount,
-        title: title);
+        title: title,
+        description: description);
   }
 
   factory HomeProductModel.fromJson(Map<String, dynamic> json) =>

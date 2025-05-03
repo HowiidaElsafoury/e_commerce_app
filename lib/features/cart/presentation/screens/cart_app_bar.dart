@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../layout/presentation/cubit/layout_cubit.dart';
-import '../cubit/cart_cubit.dart';
+import '../cubits/cart_cubit/cart_cubit.dart';
 
 class CartAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CartAppBar({super.key});

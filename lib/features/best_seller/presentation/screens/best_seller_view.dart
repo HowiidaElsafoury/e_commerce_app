@@ -16,7 +16,6 @@ class BestSellerView extends StatefulWidget {
 class _BestSellerViewState extends State<BestSellerView> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<BestSellerCubit>().getBestSellerData();
   }
